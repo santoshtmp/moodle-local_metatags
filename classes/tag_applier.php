@@ -31,7 +31,6 @@ defined('MOODLE_INTERNAL') || die();
  * Resolves configured tags and renders them into document head markup.
  */
 class tag_applier {
-
     /**
      * Resolve the effective list of meta tags for the given Moodle page,
      * honouring the inheritance chain: activity/module > course > category
@@ -116,12 +115,12 @@ class tag_applier {
             $rowsbytype[$row->pagetype] = $row;
         }
 
-        $selected_row = $rowsbytype['__custom__'] ?? null;
+        $selectedrow = $rowsbytype['__custom__'] ?? null;
 
-        if ($selected_row === null) {
+        if ($selectedrow === null) {
             foreach ($pagetypes as $type) {
                 if (isset($rowsbytype[$type])) {
-                    $selected_row = $rowsbytype[$type];
+                    $selectedrow = $rowsbytype[$type];
                     break;
                 }
             }
@@ -129,8 +128,8 @@ class tag_applier {
 
 
         $tags = null;
-        if ($selected_row && $selected_row->tags) {
-            $tags = json_decode($selected_row->tags);
+        if ($selectedrow && $selectedrow->tags) {
+            $tags = json_decode($selectedrow->tags);
         }
 
 

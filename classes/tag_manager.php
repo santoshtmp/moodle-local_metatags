@@ -33,7 +33,11 @@ defined('MOODLE_INTERNAL') || die();
  * Core logic for local_metatags definitions and storage.
  */
 class tag_manager {
-
+    /**
+     * Database table name for storing meta tags.
+     *
+     * @var string
+     */
     public const TABLENAME = 'local_metatags_tags';
 
     /**
@@ -48,155 +52,154 @@ class tag_manager {
                 'attribute' => 'name',
                 'label' => 'tag_description',
                 'default' => '[description]',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
             'keywords'               => [
                 'attribute' => 'name',
                 'label' => 'tag_keywords',
                 'default' => '',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
             'author'                 => [
                 'attribute' => 'name',
                 'label' => 'tag_author',
                 'default' => '[sitename]',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
             'robots'                 => [
                 'attribute' => 'name',
                 'label' => 'tag_robots',
                 'default' => '',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
             'canonical'              => [
                 'attribute' => 'link',
                 'label' => 'tag_canonical',
                 'default' => '',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
             'image'                  => [
                 'attribute' => 'name',
                 'label' => 'tag_image',
                 'default' => '',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
 
             'og:title'                => [
                 'attribute' => 'property',
                 'label' => 'tag_ogtitle',
                 'default' => '[pagetitle]',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:description'         => [
                 'attribute' => 'property',
                 'label' => 'tag_ogdescription',
                 'default' => '[description]',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:type'                 => [
                 'attribute' => 'property',
                 'label' => 'tag_ogtype',
                 'default' => 'website',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image'                => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimage',
                 'default' => false,
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:url'                  => [
                 'attribute' => 'property',
                 'label' => 'tag_ogurl',
                 'default' => '[pageurl]',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:site_name'           => [
                 'attribute' => 'property',
                 'label' => 'tag_ogsitename',
                 'default' => '[sitename]',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:locale'              => [
                 'attribute' => 'property',
                 'label' => 'tag_oglocale',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image:secure_url'    => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimagesecureurl',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image:type'          => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimagetype',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image:width'         => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimagewidth',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image:height'        => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimageheight',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image:alt'           => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimagealt',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
 
             'twitter:card'            => [
                 'attribute' => 'name',
                 'label' => 'tag_twittercard',
                 'default' => '',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:title'           => [
                 'attribute' => 'name',
                 'label' => 'tag_twittertitle',
                 'default' => '[pagetitle]',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:description'    => [
                 'attribute' => 'name',
                 'label' => 'tag_twitterdescription',
                 'default' => '[description]',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:image'           => [
                 'attribute' => 'name',
                 'label' => 'tag_twitterimage',
                 'default' => '',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:image:alt'       => [
                 'attribute' => 'name',
                 'label' => 'tag_twitterimagealt',
                 'default' => '',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:site'            => [
                 'attribute' => 'name',
                 'label' => 'tag_twittersite',
                 'default' => '',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:creator'         => [
                 'attribute' => 'name',
                 'label' => 'tag_twittercreator',
                 'default' => '',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
-
         ];
     }
 
@@ -229,7 +232,6 @@ class tag_manager {
      * @return array group label => [pagetype => label]
      */
     public static function get_pagetype_options(): array {
-
         $groups = [];
 
         $groups[get_string('pagetypegroup_general', 'local_metatags')] = [
@@ -306,7 +308,6 @@ class tag_manager {
         ) === 1;
     }
 
-
     /**
      * Check whether the current user can manage the plugin.
      *
@@ -332,14 +333,14 @@ class tag_manager {
             global $DB;
 
             $pagetype = (string) ($mformdata->pagetype ?? '');
-            $custom_urlpath = trim((string) ($mformdata->custom_urlpath ?? ''));
+            $customurlpath = trim((string) ($mformdata->custom_urlpath ?? ''));
             if ($pagetype === '__custom__') {
-                $custom_urlpath = '/' . trim($custom_urlpath, '/');
-                if ($custom_urlpath === '/') {
-                    $custom_urlpath = '';
+                $customurlpath = '/' . trim($customurlpath, '/');
+                if ($customurlpath === '/') {
+                    $customurlpath = '';
                 }
             } else {
-                $custom_urlpath = '';
+                $customurlpath = '';
             }
 
             // Known meta tag definitions.
@@ -362,7 +363,7 @@ class tag_manager {
             $record = new \stdClass();
             $record->id = isset($mformdata->id) ? $mformdata->id : 0;
             $record->pagetype = $pagetype;
-            $record->urlpath = $custom_urlpath;
+            $record->urlpath = $customurlpath;
             $record->tags = json_encode($tags);
             $record->status = !empty($mformdata->status) ? 1 : 0;
             $record->timemodified = $now;

@@ -35,7 +35,6 @@ require_once($CFG->libdir . '/formslib.php');
  * Form for creating and editing page-type tag configurations.
  */
 class tags_form extends \moodleform {
-
     /**
      * Define the form fields.
      *
@@ -47,8 +46,6 @@ class tags_form extends \moodleform {
 
         // Page type options.
         $pagetypeoptions = tag_manager::get_pagetype_options();
-
-
 
         // Keep the selected Moodle scope when the form is submitted.
         $mform->addElement('header', 'hdrtargeting', get_string('targeting', 'local_metatags'));
@@ -86,7 +83,10 @@ class tags_form extends \moodleform {
                 }
                 $fieldname = tag_manager::get_tag_fieldname($tagname);
                 if (in_array($def['label'], ['tag_description', 'tag_ogdescription', 'tag_twitterdescription'], true)) {
-                    $mform->addElement('textarea', $fieldname, get_string($def['label'], 'local_metatags'), ['rows' => 2, 'cols' => 60]);
+                    $mform->addElement('textarea', $fieldname, get_string($def['label'], 'local_metatags'), [
+                        'rows' => 2,
+                        'cols' => 60,
+                    ]);
                 } else {
                     $mform->addElement('text', $fieldname, get_string($def['label'], 'local_metatags'), ['size' => 60]);
                 }
@@ -111,7 +111,6 @@ class tags_form extends \moodleform {
         $this->add_action_buttons(true, get_string('save', 'local_metatags'));
     }
 
-
     /**
      * Validate form data.
      *
@@ -131,13 +130,12 @@ class tags_form extends \moodleform {
             $errors['pagetype'] = get_string('required');
         }
 
-
         $pagetype = (string) ($data['pagetype'] ?? '');
         $customurlpath = trim((string) ($data['custom_urlpath'] ?? ''));
         if ($pagetype === '__custom__') {
             if ($customurlpath === '') {
                 $errors['custom_urlpath'] = get_string('required');
-            } elseif ($customurlpath[0] !== '/') {
+            } else if ($customurlpath[0] !== '/') {
                 $errors['custom_urlpath'] = get_string('custom_url_invalid', 'local_metatags');
             } else {
                 $customurlpath = '/' . trim($customurlpath, '/');

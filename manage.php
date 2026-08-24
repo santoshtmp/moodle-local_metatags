@@ -157,11 +157,7 @@ if (empty($buckets)) {
             ]
         ));
 
-
-        /*
-         * Empty page type means global/default metadata.
-         */
-
+        // Empty page type means global/default metadata.
         if ($pagetype == '*') {
             $langkey = 'pagetype_all';
         } elseif ($pagetype == '__custom__') {
