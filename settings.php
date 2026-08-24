@@ -40,5 +40,6 @@ if ($hassiteconfig) {
     ));
 }
 
-// This plugin does not register a standard admin_settingpage, so make sure the settings loader does not try to render one for local_metatags.
+// This plugin does not register a standard admin_settingpage.
+// so make sure the settings loader does not try to render one for local_metatags.
 $settings = null;

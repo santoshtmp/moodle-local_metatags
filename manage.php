@@ -1,10 +1,10 @@
 <?php
-// This file is part of Moodle - http://moodle.org/.
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published
-// by the Free Software Foundation, either version 3 of the License,
-// or (at your option) any later version.
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -126,7 +126,7 @@ if (empty($buckets)) {
     $table->responsive = false;
 
     $corerenderer = $PAGE->get_renderer('core');
-    $action_page_path = '/local/metatags/edit.php';
+    $actionpagepath = '/local/metatags/edit.php';
     foreach ($buckets as $bucket) {
         $pagetype = $bucket->pagetype;
 
@@ -137,7 +137,7 @@ if (empty($buckets)) {
         $actionurlparam = ['id' => $bucket->id, 'sesskey' => sesskey()];
 
         $actionmenu->add(new \action_menu_link(
-            new moodle_url($action_page_path, ['action' => 'edit'] + $actionurlparam),
+            new moodle_url($actionpagepath, ['action' => 'edit'] + $actionurlparam),
             new pix_icon('i/edit', 'edit'),
             get_string('edit', 'local_metatags'),
             false,
@@ -145,7 +145,7 @@ if (empty($buckets)) {
         ));
 
         $actionmenu->add(new \action_menu_link(
-            new moodle_url($action_page_path, ['action' => 'delete'] + $actionurlparam),
+            new moodle_url($actionpagepath, ['action' => 'delete'] + $actionurlparam),
             new pix_icon('i/delete', 'delete'),
             get_string('delete', 'local_metatags'),
             false,
@@ -163,19 +163,19 @@ if (empty($buckets)) {
          */
 
         if ($pagetype == '*') {
-            $lang_key = 'pagetype_all';
+            $langkey = 'pagetype_all';
         } elseif ($pagetype == '__custom__') {
-            $lang_key = 'pt_custom';
+            $langkey = 'pt_custom';
         } else {
-            $lang_key = str_replace('-', '_', $pagetype);
-            $lang_key = 'pt_' . str_replace('*', 'any', $lang_key);
+            $langkey = str_replace('-', '_', $pagetype);
+            $langkey = 'pt_' . str_replace('*', 'any', $langkey);
         }
 
-        $pagetypelabel = get_string($lang_key, 'local_metatags') .' '. $bucket->urlpath;
+        $pagetypelabel = get_string($langkey, 'local_metatags') . ($bucket->urlpath) ? ' : ' . $bucket->urlpath : '';
 
         $table->data[] = [
             $pagetypelabel,
-            ($bucket->status == '1')? get_string('active'):get_string('inactive'),
+            ($bucket->status == '1') ? get_string('active') : get_string('inactive'),
             $corerenderer->render($actionmenu),
         ];
     }
