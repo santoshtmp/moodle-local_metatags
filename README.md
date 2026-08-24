@@ -5,8 +5,45 @@ and manage HTML metadata for their pages. It can be used to improve search
 engine optimization (SEO), search result descriptions, social sharing
 previews, canonical URLs, indexing directives, and other metadata without
 modifying Moodle core or theme files. It helps search engines and social
-platforms understand and display Moodle pages more effectively, but does not
-guarantee higher search rankings.
+platforms understand and display Moodle pages more effectively.
+
+## What the plugin manages
+
+The plugin adds metadata to the HTML `<head>` section of matching Moodle
+pages. It provides dedicated fields for the following groups:
+
+- **Basic SEO metadata:** `description`, `keywords`, `author`, `robots`,
+   canonical URLs, and a general page image.
+- **Open Graph metadata:** `og:title`, `og:description`, `og:type`,
+   `og:image`, `og:url`, `og:site_name`, `og:locale`, image dimensions, image
+   MIME type, secure image URLs, and image alt text. These fields are used by
+   platforms such as Facebook, LinkedIn, and other services that read Open
+   Graph metadata.
+- **Twitter/X card metadata:** card type, title, description, image, image
+   alt text, site account, and creator account.
+
+The fields can be used for the Moodle front page, courses, course categories,
+activities, resources, user pages, login pages, blog pages, or any other
+Moodle route that can be matched by the targeting options. Another plugin or
+theme can also add, remove, or replace tags through the override hook.
+
+### SEO and search engines
+
+The `description` field provides a page summary that search engines may use,
+while `robots` controls indexing instructions such as `index,follow`,
+`noindex,nofollow`, or `noarchive`. A canonical URL helps identify the
+preferred URL when the same content is reachable through multiple URLs.
+These settings provide metadata that search engines can use; they do not
+guarantee indexing, a particular search result description, or higher
+rankings.
+
+### Social sharing previews
+
+Open Graph and Twitter/X fields control the title, description, URL, and image
+shown when a Moodle page is shared on supported social platforms. For useful
+previews, use an absolute or publicly accessible image URL and provide a
+specific title and description for important pages. Social platforms may
+cache previews, so changes might not appear immediately.
 
 Configurations can target the whole site, a Moodle page type, a wildcard page
 type, or an exact URL path:
@@ -23,15 +60,41 @@ matching. Configurations are site-wide and are managed by users with the
 
 Examples include `blog-*`, `site-index`, `login-index`, and `course-view-*`.
 
+For example, a site administrator could configure:
+
+```text
+Target: course-view-*
+Description: [description]
+Open Graph title: [coursename]
+Open Graph description: [description]
+Open Graph URL: [pageurl]
+Twitter card: summary_large_image
+```
+
+More specific configurations override broader ones. A custom URL route takes
+priority over page-type matching, and empty fields can inherit values from a
+broader scope where inheritance is supported.
+
 ## Installation
 
 1. Copy the `metatags` folder into `local/` so you have `local/metatags/`.
 2. Visit *Site administration > Notifications* to install.
 3. Go to *Site administration > Plugins > Local plugins > Meta tags* to
    configure global defaults and browse overrides.
+4. On the Meta tags management page, enable **Enable Meta tags**. The plugin
+   must be enabled before configured metadata is added to Moodle page output.
 
 Users with the `local/metatags:manage` capability can manage tags from the
 plugin administration page.
+
+After enabling the plugin, add or edit a configuration and choose its target
+page type or custom URL route. Saving metadata while the plugin is disabled
+stores the configuration but does not output the tags. Disable the setting
+again when you need to pause metadata output without deleting configurations.
+
+The plugin does not collect visitor analytics, generate a sitemap, submit
+pages to search engines, or replace Moodle authentication and access control.
+It only manages metadata output for pages that Moodle renders.
 
 ## Overriding tags from another plugin or theme
 
@@ -93,3 +156,7 @@ add, remove, or replace tags. The current `moodle_page` is available through
 Tokens are replaced when the page is rendered. If a token has no value in the
 current context, it is replaced with an empty value.
 
+## Screenshot
+![Metatags setting location](./pix/screenshot/metatags-location.png)
+![Metatags manage page](./pix/screenshot/metatags-manage.png)
+![Metatags edit form](./pix/screenshot/metatags-edit.png)
