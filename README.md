@@ -156,3 +156,7 @@ add, remove, or replace tags. The current `moodle_page` is available through
 Tokens are replaced when the page is rendered. If a token has no value in the
 current context, it is replaced with an empty value.
 
+## Screenshot
+![Metatags setting location](./pix/screenshot/metatags-location.png)
+![Metatags manage page](./pix/screenshot/metatags-manage.png)
+![Metatags edit form](./pix/screenshot/metatags-edit.png)
