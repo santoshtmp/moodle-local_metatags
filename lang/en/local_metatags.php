@@ -33,7 +33,7 @@ $string['metatags:managecourse']   = 'Manage meta tags for a course';
 $string['metatags:managemodule']   = 'Manage meta tags for an activity';
 $string['metatags:manageuser']     = 'Manage meta tags for a user profile';
 
-$string['alradyexist']       = 'Alrady exist';
+$string['alreadyexist']       = 'Already exists';
 $string['addmetatag']        = 'Add meta tag';
 $string['enablemetatags']    = 'Enable Meta tags';
 $string['enablemetatags_desc'] = 'Enable automatic meta tags for Moodle pages.';
