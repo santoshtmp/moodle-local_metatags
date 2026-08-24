@@ -23,6 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// phpcs:ignoreFile moodle.Files.LangFilesOrdering.IncorrectOrder
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname']          = 'Meta tags';
