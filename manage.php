@@ -160,14 +160,17 @@ if (empty($buckets)) {
         // Empty page type means global/default metadata.
         if ($pagetype == '*') {
             $langkey = 'pagetype_all';
-        } elseif ($pagetype == '__custom__') {
+        } else if ($pagetype == '__custom__') {
             $langkey = 'pt_custom';
         } else {
             $langkey = str_replace('-', '_', $pagetype);
             $langkey = 'pt_' . str_replace('*', 'any', $langkey);
         }
 
-        $pagetypelabel = get_string($langkey, 'local_metatags') . ($bucket->urlpath) ? ' : ' . $bucket->urlpath : '';
+        $pagetypelabel = get_string($langkey, 'local_metatags');
+        if (!empty($bucket->urlpath)) {
+            $pagetypelabel .= ' : ' . $bucket->urlpath;
+        }
 
         $table->data[] = [
             $pagetypelabel,

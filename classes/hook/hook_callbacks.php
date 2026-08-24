@@ -25,8 +25,6 @@
 
 namespace local_metatags\hook;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core\hook\output\before_standard_head_html_generation;
 use local_metatags\tag_applier;
 
@@ -34,7 +32,6 @@ use local_metatags\tag_applier;
  * Callback handlers for Moodle output hooks.
  */
 class hook_callbacks {
-
     /**
      * Hook callback for Moodle 4.5+.
      *

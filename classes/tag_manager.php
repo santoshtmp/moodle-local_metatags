@@ -27,8 +27,6 @@ namespace local_metatags;
 
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Core logic for local_metatags definitions and storage.
  */
@@ -345,9 +343,9 @@ class tag_manager {
 
             // Known meta tag definitions.
             $tags = [];
-            $definitions = tag_manager::get_definitions();
+            $definitions = self::get_definitions();
             foreach ($definitions as $tagname => $definition) {
-                $fieldname = tag_manager::get_tag_fieldname($tagname);
+                $fieldname = self::get_tag_fieldname($tagname);
                 if (isset($mformdata->$fieldname) && !empty(trim((string) $mformdata->$fieldname))) {
                     $tags[] = [
                         'tagname' => $tagname,
@@ -368,13 +366,12 @@ class tag_manager {
             $record->status = !empty($mformdata->status) ? 1 : 0;
             $record->timemodified = $now;
 
-
             // Insert or update.
             if (!empty($record->id) && ($mformdata->action ?? '') === 'edit') {
                 if ($DB->record_exists(self::TABLENAME, ['id' => $record->id])) {
                     $status = $DB->update_record(self::TABLENAME, $record);
                     if ($status) {
-                        $message =  get_string('updated', 'local_metatags');
+                        $message = get_string('updated', 'local_metatags');
                     }
                     $returnurl = $updatereturnurl;
                 } else {
@@ -384,7 +381,7 @@ class tag_manager {
                 $record->timecreated = $now;
                 $status = $DB->insert_record(self::TABLENAME, $record);
                 if ($status) {
-                    $message =  get_string('saved', 'local_metatags');
+                    $message = get_string('saved', 'local_metatags');
                     $returnurl = $updatereturnurl;
                 }
             }
@@ -430,7 +427,7 @@ class tag_manager {
                             continue;
                         }
                         if (!empty($tag['tagname']) && !empty($tag['content'])) {
-                            $fieldname = tag_manager::get_tag_fieldname($tag['tagname']);
+                            $fieldname = self::get_tag_fieldname($tag['tagname']);
                             $entry->$fieldname = $tag['content'];
                         }
                     }

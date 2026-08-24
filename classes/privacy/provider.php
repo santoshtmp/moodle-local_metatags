@@ -25,8 +25,6 @@
 
 namespace local_metatags\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy provider for local_metatags.
  *

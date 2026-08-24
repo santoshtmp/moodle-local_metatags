@@ -25,8 +25,6 @@
 
 namespace local_metatags;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Resolves configured tags and renders them into document head markup.
  */
@@ -132,7 +130,6 @@ class tag_applier {
             $tags = json_decode($selectedrow->tags);
         }
 
-
         $resolved = [];
         if (is_array($tags)) {
             foreach ($tags as $tag) {
@@ -161,18 +158,12 @@ class tag_applier {
             }
         }
 
-        // Allow other plugin or theme to override tags
+        // Allow other plugin or theme to override tags.
         $hook = new \local_metatags\hook\override_tags($resolved, $page);
         \core\di::get(\core\hook\manager::class)->dispatch($hook);
         $resolved = $hook->get_tags();
 
-        /*
-        * Replace tokens such as:
-        *
-        * {sitename}
-        * {coursename}
-        * {fullname}
-        */
+        // Replace tokens such as: {sitename}, {coursename}, {fullname}.
         return self::replace_tokens_in_all($resolved, $page);
     }
 
@@ -464,27 +455,23 @@ class tag_applier {
         $html = '';
 
         foreach ($tags as $tag) {
-            $content   = trim((string) $tag['content']);
-            $tagname   = $tag['tagname'];
+            $content = trim((string) $tag['content']);
+            $tagname = $tag['tagname'];
             $attribute = $tag['attribute'];
 
             if ($content === '') {
                 continue;
             }
 
-            // -------------------------------------------------
-            // Prevent duplicate description on the front page
-            // -------------------------------------------------
+            // Prevent duplicate description on the front page.
             if ($isfrontpage && $attribute === 'name' && $tagname === 'description') {
                 $summary = s(strip_tags(format_text($SITE->summary, FORMAT_HTML)));
-                if (!empty($summary) &&  $summary == $content) {
+                if (!empty($summary) && $summary == $content) {
                     continue;
                 }
             }
 
-            // -------------------------------------------------
-            // Make image URLs absolute when needed
-            // -------------------------------------------------
+            // Make image URLs absolute when needed.
             if (in_array($tagname, [
                 'canonical',
                 'image',
@@ -497,9 +484,7 @@ class tag_applier {
                 }
             }
 
-            // -------------------------------------------------
-            // Output
-            // -------------------------------------------------
+            // Output.
             if ($attribute === 'link') {
                 $html .= \html_writer::empty_tag('link', [
                     'rel'  => $tagname,

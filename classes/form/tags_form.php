@@ -27,8 +27,6 @@ namespace local_metatags\form;
 
 use local_metatags\tag_manager;
 
-defined('MOODLE_INTERNAL') || die();
-
 require_once($CFG->libdir . '/formslib.php');
 
 /**

@@ -24,4 +24,5 @@
  */
 
 require(__DIR__ . '/../../config.php');
+require_login();
 redirect(new moodle_url('/local/metatags/manage.php'));
