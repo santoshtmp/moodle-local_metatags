@@ -53,15 +53,6 @@ class tag_applier {
         $urlpath = self::get_current_url_path();
 
         // Build pagetype hierarchy.
-        //
-        // Example:
-        // admin-local-metatags-manage
-        //
-        // Results:
-        // admin-local-metatags-manage
-        // admin-local-metatags-*
-        // admin-local-*
-        // admin-*
         $pagetypes = [$pagetype];
 
         $parts = explode('-', $pagetype);
@@ -123,7 +114,6 @@ class tag_applier {
                 }
             }
         }
-
 
         $tags = null;
         if ($selectedrow && $selectedrow->tags) {
@@ -214,7 +204,6 @@ class tag_applier {
 
         return $path;
     }
-
 
     /**
      * Replace tokens inside every tag content.

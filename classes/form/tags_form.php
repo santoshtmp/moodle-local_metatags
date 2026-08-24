@@ -27,8 +27,6 @@ namespace local_metatags\form;
 
 use local_metatags\tag_manager;
 
-require_once($CFG->libdir . '/formslib.php');
-
 /**
  * Form for creating and editing page-type tag configurations.
  */

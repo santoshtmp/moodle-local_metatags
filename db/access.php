@@ -24,7 +24,6 @@
  */
 
 $capabilities = [
-
     // Manage global (system-wide) defaults and every override in the site.
     'local/metatags:manage' => [
         'riskbitmask'  => RISK_XSS,
