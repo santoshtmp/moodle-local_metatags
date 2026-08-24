@@ -25,6 +25,7 @@
 
 namespace local_metatags\form;
 
+use local_metatags\tag_manager;
 use moodleform;
 
 defined('MOODLE_INTERNAL') || die;
