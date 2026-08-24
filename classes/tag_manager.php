@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/.
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published
-// by the Free Software Foundation, either version 3 of the License,
-// or (at your option) any later version.
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tag manager for local_metatags.
@@ -27,13 +27,15 @@ namespace local_metatags;
 
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Core logic for local_metatags definitions and storage.
  */
 class tag_manager {
-
+    /**
+     * Database table name for storing meta tags.
+     *
+     * @var string
+     */
     public const TABLENAME = 'local_metatags_tags';
 
     /**
@@ -48,155 +50,154 @@ class tag_manager {
                 'attribute' => 'name',
                 'label' => 'tag_description',
                 'default' => '[description]',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
             'keywords'               => [
                 'attribute' => 'name',
                 'label' => 'tag_keywords',
                 'default' => '',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
             'author'                 => [
                 'attribute' => 'name',
                 'label' => 'tag_author',
                 'default' => '[sitename]',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
             'robots'                 => [
                 'attribute' => 'name',
                 'label' => 'tag_robots',
                 'default' => '',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
             'canonical'              => [
                 'attribute' => 'link',
                 'label' => 'tag_canonical',
                 'default' => '',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
             'image'                  => [
                 'attribute' => 'name',
                 'label' => 'tag_image',
                 'default' => '',
-                'group' => 'basic'
+                'group' => 'basic',
             ],
 
             'og:title'                => [
                 'attribute' => 'property',
                 'label' => 'tag_ogtitle',
                 'default' => '[pagetitle]',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:description'         => [
                 'attribute' => 'property',
                 'label' => 'tag_ogdescription',
                 'default' => '[description]',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:type'                 => [
                 'attribute' => 'property',
                 'label' => 'tag_ogtype',
                 'default' => 'website',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image'                => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimage',
                 'default' => false,
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:url'                  => [
                 'attribute' => 'property',
                 'label' => 'tag_ogurl',
                 'default' => '[pageurl]',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:site_name'           => [
                 'attribute' => 'property',
                 'label' => 'tag_ogsitename',
                 'default' => '[sitename]',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:locale'              => [
                 'attribute' => 'property',
                 'label' => 'tag_oglocale',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image:secure_url'    => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimagesecureurl',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image:type'          => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimagetype',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image:width'         => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimagewidth',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image:height'        => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimageheight',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
             'og:image:alt'           => [
                 'attribute' => 'property',
                 'label' => 'tag_ogimagealt',
                 'default' => '',
-                'group' => 'opengraph'
+                'group' => 'opengraph',
             ],
 
             'twitter:card'            => [
                 'attribute' => 'name',
                 'label' => 'tag_twittercard',
                 'default' => '',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:title'           => [
                 'attribute' => 'name',
                 'label' => 'tag_twittertitle',
                 'default' => '[pagetitle]',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:description'    => [
                 'attribute' => 'name',
                 'label' => 'tag_twitterdescription',
                 'default' => '[description]',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:image'           => [
                 'attribute' => 'name',
                 'label' => 'tag_twitterimage',
                 'default' => '',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:image:alt'       => [
                 'attribute' => 'name',
                 'label' => 'tag_twitterimagealt',
                 'default' => '',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:site'            => [
                 'attribute' => 'name',
                 'label' => 'tag_twittersite',
                 'default' => '',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
             'twitter:creator'         => [
                 'attribute' => 'name',
                 'label' => 'tag_twittercreator',
                 'default' => '',
-                'group' => 'twitter'
+                'group' => 'twitter',
             ],
-
         ];
     }
 
@@ -229,7 +230,6 @@ class tag_manager {
      * @return array group label => [pagetype => label]
      */
     public static function get_pagetype_options(): array {
-
         $groups = [];
 
         $groups[get_string('pagetypegroup_general', 'local_metatags')] = [
@@ -306,7 +306,6 @@ class tag_manager {
         ) === 1;
     }
 
-
     /**
      * Check whether the current user can manage the plugin.
      *
@@ -332,21 +331,21 @@ class tag_manager {
             global $DB;
 
             $pagetype = (string) ($mformdata->pagetype ?? '');
-            $custom_urlpath = trim((string) ($mformdata->custom_urlpath ?? ''));
+            $customurlpath = trim((string) ($mformdata->custom_urlpath ?? ''));
             if ($pagetype === '__custom__') {
-                $custom_urlpath = '/' . trim($custom_urlpath, '/');
-                if ($custom_urlpath === '/') {
-                    $custom_urlpath = '';
+                $customurlpath = '/' . trim($customurlpath, '/');
+                if ($customurlpath === '/') {
+                    $customurlpath = '';
                 }
             } else {
-                $custom_urlpath = '';
+                $customurlpath = '';
             }
 
             // Known meta tag definitions.
             $tags = [];
-            $definitions = tag_manager::get_definitions();
+            $definitions = self::get_definitions();
             foreach ($definitions as $tagname => $definition) {
-                $fieldname = tag_manager::get_tag_fieldname($tagname);
+                $fieldname = self::get_tag_fieldname($tagname);
                 if (isset($mformdata->$fieldname) && !empty(trim((string) $mformdata->$fieldname))) {
                     $tags[] = [
                         'tagname' => $tagname,
@@ -362,18 +361,17 @@ class tag_manager {
             $record = new \stdClass();
             $record->id = isset($mformdata->id) ? $mformdata->id : 0;
             $record->pagetype = $pagetype;
-            $record->urlpath = $custom_urlpath;
+            $record->urlpath = $customurlpath;
             $record->tags = json_encode($tags);
             $record->status = !empty($mformdata->status) ? 1 : 0;
             $record->timemodified = $now;
-
 
             // Insert or update.
             if (!empty($record->id) && ($mformdata->action ?? '') === 'edit') {
                 if ($DB->record_exists(self::TABLENAME, ['id' => $record->id])) {
                     $status = $DB->update_record(self::TABLENAME, $record);
                     if ($status) {
-                        $message =  get_string('updated', 'local_metatags');
+                        $message = get_string('updated', 'local_metatags');
                     }
                     $returnurl = $updatereturnurl;
                 } else {
@@ -383,7 +381,7 @@ class tag_manager {
                 $record->timecreated = $now;
                 $status = $DB->insert_record(self::TABLENAME, $record);
                 if ($status) {
-                    $message =  get_string('saved', 'local_metatags');
+                    $message = get_string('saved', 'local_metatags');
                     $returnurl = $updatereturnurl;
                 }
             }
@@ -429,7 +427,7 @@ class tag_manager {
                             continue;
                         }
                         if (!empty($tag['tagname']) && !empty($tag['content'])) {
-                            $fieldname = tag_manager::get_tag_fieldname($tag['tagname']);
+                            $fieldname = self::get_tag_fieldname($tag['tagname']);
                             $entry->$fieldname = $tag['content'];
                         }
                     }

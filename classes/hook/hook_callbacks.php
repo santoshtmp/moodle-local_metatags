@@ -1,10 +1,10 @@
 <?php
-// This file is part of Moodle - http://moodle.org/.
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published
-// by the Free Software Foundation, either version 3 of the License,
-// or (at your option) any later version.
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -25,8 +25,6 @@
 
 namespace local_metatags\hook;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core\hook\output\before_standard_head_html_generation;
 use local_metatags\tag_applier;
 
@@ -34,7 +32,6 @@ use local_metatags\tag_applier;
  * Callback handlers for Moodle output hooks.
  */
 class hook_callbacks {
-
     /**
      * Hook callback for Moodle 4.5+.
      *

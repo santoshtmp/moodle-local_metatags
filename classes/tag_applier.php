@@ -1,10 +1,10 @@
 <?php
-// This file is part of Moodle - http://moodle.org/.
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published
-// by the Free Software Foundation, either version 3 of the License,
-// or (at your option) any later version.
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -25,13 +25,10 @@
 
 namespace local_metatags;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Resolves configured tags and renders them into document head markup.
  */
 class tag_applier {
-
     /**
      * Resolve the effective list of meta tags for the given Moodle page,
      * honouring the inheritance chain: activity/module > course > category
@@ -56,15 +53,6 @@ class tag_applier {
         $urlpath = self::get_current_url_path();
 
         // Build pagetype hierarchy.
-        //
-        // Example:
-        // admin-local-metatags-manage
-        //
-        // Results:
-        // admin-local-metatags-manage
-        // admin-local-metatags-*
-        // admin-local-*
-        // admin-*
         $pagetypes = [$pagetype];
 
         $parts = explode('-', $pagetype);
@@ -116,28 +104,25 @@ class tag_applier {
             $rowsbytype[$row->pagetype] = $row;
         }
 
-        $selected_row = $rowsbytype['__custom__'] ?? null;
+        $selectedrow = $rowsbytype['__custom__'] ?? null;
 
-        if ($selected_row === null) {
+        if ($selectedrow === null) {
             foreach ($pagetypes as $type) {
                 if (isset($rowsbytype[$type])) {
-                    $selected_row = $rowsbytype[$type];
+                    $selectedrow = $rowsbytype[$type];
                     break;
                 }
             }
         }
 
-
         $tags = null;
-        if ($selected_row && $selected_row->tags) {
-            $tags = json_decode($selected_row->tags);
+        if ($selectedrow && $selectedrow->tags) {
+            $tags = json_decode($selectedrow->tags);
         }
-
 
         $resolved = [];
         if (is_array($tags)) {
             foreach ($tags as $tag) {
-
                 if (is_object($tag)) {
                     $tag = (array) $tag;
                 }
@@ -162,18 +147,12 @@ class tag_applier {
             }
         }
 
-        // Allow other plugin or theme to override tags
+        // Allow other plugin or theme to override tags.
         $hook = new \local_metatags\hook\override_tags($resolved, $page);
         \core\di::get(\core\hook\manager::class)->dispatch($hook);
         $resolved = $hook->get_tags();
 
-        /*
-        * Replace tokens such as:
-        *
-        * {sitename}
-        * {coursename}
-        * {fullname}
-        */
+        // Replace tag tokens.
         return self::replace_tokens_in_all($resolved, $page);
     }
 
@@ -224,7 +203,6 @@ class tag_applier {
 
         return $path;
     }
-
 
     /**
      * Replace tokens inside every tag content.
@@ -465,42 +443,42 @@ class tag_applier {
         $html = '';
 
         foreach ($tags as $tag) {
-            $content   = trim((string) $tag['content']);
-            $tagname   = $tag['tagname'];
+            $content = trim((string) $tag['content']);
+            $tagname = $tag['tagname'];
             $attribute = $tag['attribute'];
 
             if ($content === '') {
                 continue;
             }
 
-            // -------------------------------------------------
-            // Prevent duplicate description on the front page
-            // -------------------------------------------------
+            // Prevent duplicate description on the front page.
             if ($isfrontpage && $attribute === 'name' && $tagname === 'description') {
                 $summary = s(strip_tags(format_text($SITE->summary, FORMAT_HTML)));
-                if (!empty($summary) &&  $summary == $content) {
+                if (!empty($summary) && $summary == $content) {
                     continue;
                 }
             }
 
-            // -------------------------------------------------
-            // Make image URLs absolute when needed
-            // -------------------------------------------------
-            if (in_array($tagname, [
-                'canonical',
-                'image',
-                'og:image',
-                'og:image:secure_url',
-                'twitter:image',
-            ], true)) {
+            // Make image URLs absolute when needed.
+            if (
+                in_array(
+                    $tagname,
+                    [
+                        'canonical',
+                        'image',
+                        'og:image',
+                        'og:image:secure_url',
+                        'twitter:image',
+                    ],
+                    true
+                )
+            ) {
                 if ($content !== '' && strpos($content, '://') === false && strpos($content, '//') !== 0) {
                     $content = (new \moodle_url($content))->out(false);
                 }
             }
 
-            // -------------------------------------------------
-            // Output
-            // -------------------------------------------------
+            // Output.
             if ($attribute === 'link') {
                 $html .= \html_writer::empty_tag('link', [
                     'rel'  => $tagname,

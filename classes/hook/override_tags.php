@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/.
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,22 +27,35 @@ use moodle_page;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class override_tags {
+    /**
+     * Resolved tags before rendering.
+     *
+     * @var array $tags
+     */
+    protected array $tags;
 
     /**
+     * Current Moodle page during tag generation.
+     *
+     * @var moodle_page $page
+     */
+    protected moodle_page $page;
+
+    /**
+     * Constructor.
+     *
      * @param array $tags Resolved tags as tagname, attribute and content arrays.
      * @param moodle_page $page Current Moodle page.
-        * @return void
      */
-    public function __construct(
-        protected array $tags,
-        protected moodle_page $page
-    ) {
+    public function __construct(array $tags, moodle_page $page) {
+        $this->tags = $tags;
+        $this->page = $page;
     }
 
     /**
      * Return the current resolved tags.
      *
-        * @return array Resolved tags as tagname, attribute and content arrays.
+     * @return array Resolved tags as tagname, attribute and content arrays.
      */
     public function get_tags(): array {
         return $this->tags;
@@ -52,7 +65,7 @@ class override_tags {
      * Replace the resolved tags.
      *
      * @param array $tags Resolved tags as tagname, attribute and content arrays.
-        * @return void
+     * @return void
      */
     public function set_tags(array $tags): void {
         $this->tags = $tags;
@@ -61,7 +74,7 @@ class override_tags {
     /**
      * Return the page for which tags are being generated.
      *
-        * @return moodle_page Current Moodle page.
+     * @return moodle_page Current Moodle page.
      */
     public function get_page(): moodle_page {
         return $this->page;
