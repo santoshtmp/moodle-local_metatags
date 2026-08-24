@@ -1,7 +1,15 @@
 # local_metatags
 
-A Moodle 4.5+ local plugin that adds Drupal Metatag-style `<meta>`/`<link>`
-tag management for configured Moodle page types and exact URL paths:
+The Meta tags plugin gives Moodle site administrators a central way to define
+and manage HTML metadata for their pages. It can be used to improve search
+engine optimization (SEO), search result descriptions, social sharing
+previews, canonical URLs, indexing directives, and other metadata without
+modifying Moodle core or theme files. It helps search engines and social
+platforms understand and display Moodle pages more effectively, but does not
+guarantee higher search rankings.
+
+Configurations can target the whole site, a Moodle page type, a wildcard page
+type, or an exact URL path:
 
 - **Global** defaults using the `*` page type
 - **Specific Moodle page types** such as `site-index`, `course-view-*`,
@@ -14,9 +22,6 @@ matching. Configurations are site-wide and are managed by users with the
 `local/metatags:manage` capability.
 
 Examples include `blog-*`, `site-index`, `login-index`, and `course-view-*`.
-
-When automatic tags are enabled, missing description and title variants are
-derived from the current page context, course, activity, category, or site.
 
 ## Installation
 
@@ -70,15 +75,21 @@ add, remove, or replace tags. The current `moodle_page` is available through
 
 ## Tokens
 
-Tag content can include placeholders that are substituted at render time:
-`[sitename]`, `[siteurl]`, `[pageurl]`, `[pagetitle]`, `[description]`,
-`[coursename]`, `[courseshortname]`, `[categoryname]`, `[activityname]`,
-`[userfullname]`, and `[image]`.
+- `[sitename]` - The full name of the Moodle site.
+- `[siteurl]` - The base URL of the Moodle site.
+- `[pageurl]` - The full URL of the current page.
+- `[pagetitle]` - The title of the current page.
+- `[description]` - The most relevant description for the current page,
+  such as the course summary, activity introduction, category description, or
+  site summary.
+- `[coursename]` - The full name of the current course.
+- `[courseshortname]` - The short name of the current course.
+- `[categoryname]` - The name of the current course category.
+- `[activityname]` - The name of the current activity or resource.
+- `[userfullname]` - The full name of the user for a user-context page.
+- `[image]` - The most relevant available image URL for the current page,
+  such as a course, category, or activity image.
 
-## Suggested roadmap / feature ideas
+Tokens are replaced when the page is rendered. If a token has no value in the
+current context, it is replaced with an empty value.
 
-See the chat response for the full list — highlights: tag presets/import-export,
-per-tag "lock" so overrides below a level can't remove a mandatory global tag,
-a live front-end preview (Google/Facebook/Twitter card mockups), scheduled
-tags, multi-language tag values, bulk CSV import for courses, and a
-`report_metatags` companion report listing pages with missing descriptions.
