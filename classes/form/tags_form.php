@@ -25,12 +25,15 @@
 
 namespace local_metatags\form;
 
-use local_metatags\tag_manager;
+use moodleform;
 
+defined('MOODLE_INTERNAL') || die;
+
+require_once($CFG->libdir . '/formslib.php');
 /**
  * Form for creating and editing page-type tag configurations.
  */
-class tags_form extends \moodleform {
+class tags_form extends moodleform {
     /**
      * Define the form fields.
      *
