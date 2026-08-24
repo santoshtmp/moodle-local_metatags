@@ -22,10 +22,10 @@ pages. It provides dedicated fields for the following groups:
 - **Twitter/X card metadata:** card type, title, description, image, image
    alt text, site account, and creator account.
 
-The fields can be used for the Moodle front page, courses, course categories,
-activities, resources, user pages, login pages, blog pages, or any other
-Moodle route that can be matched by the targeting options. Another plugin or
-theme can also add, remove, or replace tags through the override hook.
+The fields can be used for the Moodle front page, course pages, activities,
+resources, user pages, login pages, blog pages, or any other Moodle route that
+can be matched by the targeting options. Another plugin or theme can also add,
+remove, or replace tags through the override hook.
 
 ### SEO and search engines
 
@@ -71,15 +71,15 @@ Open Graph URL: [pageurl]
 Twitter card: summary_large_image
 ```
 
-More specific configurations override broader ones. A custom URL route takes
-priority over page-type matching, and empty fields can inherit values from a
-broader scope where inheritance is supported.
+The most specific matching page type is used. A custom URL route takes
+priority over page-type matching. The selected configuration supplies the
+metadata for the page; configurations are not merged across multiple scopes.
 
 ## Installation
 
 1. Copy the `metatags` folder into `local/` so you have `local/metatags/`.
 2. Visit *Site administration > Notifications* to install.
-3. Go to *Site administration > Plugins > Local plugins > Meta tags* to
+3. Go to *Site administration > Appearance > Meta tags* to
    configure global defaults and browse overrides.
 4. On the Meta tags management page, enable **Enable Meta tags**. The plugin
    must be enabled before configured metadata is added to Moodle page output.

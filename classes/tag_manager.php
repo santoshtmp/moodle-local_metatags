@@ -40,7 +40,6 @@ class tag_manager {
 
     /**
      * Catalogue of well-known tags the UI offers as dedicated fields.
-     * Admins can still add arbitrary custom tags beyond this list.
      *
      * @return array tagname => [attribute, label, default, group]
      */
