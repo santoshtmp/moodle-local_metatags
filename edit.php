@@ -39,9 +39,7 @@ $id = optional_param('id', 0, PARAM_INT);
 
 $PAGE->set_context($context);
 
-/**
- * Set Page Information
- */
+// Set page information.
 $url = new moodle_url('/local/metatags/edit.php');
 $tagmanagelisturl = new moodle_url('/local/metatags/manage.php');
 $PAGE->set_url($url);

@@ -123,7 +123,6 @@ class tag_applier {
         $resolved = [];
         if (is_array($tags)) {
             foreach ($tags as $tag) {
-
                 if (is_object($tag)) {
                     $tag = (array) $tag;
                 }
@@ -153,7 +152,7 @@ class tag_applier {
         \core\di::get(\core\hook\manager::class)->dispatch($hook);
         $resolved = $hook->get_tags();
 
-        // Replace tokens such as: {sitename}, {coursename}, {fullname}.
+        // Replace tag tokens.
         return self::replace_tokens_in_all($resolved, $page);
     }
 
@@ -461,13 +460,19 @@ class tag_applier {
             }
 
             // Make image URLs absolute when needed.
-            if (in_array($tagname, [
-                'canonical',
-                'image',
-                'og:image',
-                'og:image:secure_url',
-                'twitter:image',
-            ], true)) {
+            if (
+                in_array(
+                    $tagname,
+                    [
+                        'canonical',
+                        'image',
+                        'og:image',
+                        'og:image:secure_url',
+                        'twitter:image',
+                    ],
+                    true
+                )
+            ) {
                 if ($content !== '' && strpos($content, '://') === false && strpos($content, '//') !== 0) {
                     $content = (new \moodle_url($content))->out(false);
                 }

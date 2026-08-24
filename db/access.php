@@ -23,6 +23,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $capabilities = [
     // Manage global (system-wide) defaults and every override in the site.
     'local/metatags:manage' => [
