@@ -67,7 +67,7 @@ echo html_writer::tag('p', get_string('manage_intro', 'local_metatags'));
 /*
  * Action buttons.
  */
-echo html_writer::start_div('mb-4');
+echo html_writer::start_div('d-flex gap-2 mb-4');
 
 $addurl = new moodle_url('/local/metatags/edit.php');
 

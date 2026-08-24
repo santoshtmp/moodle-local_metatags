@@ -66,7 +66,7 @@ $string['tokenhelp_desc'] = '
 
 <p>The <strong>[description]</strong> placeholder automatically adapts to the current page context, making it particularly useful for generating dynamic SEO meta descriptions.</p>
 
-<p>Another plugin or theme may also inject/manage the same meta tags. Check for existing tags before enabling duplicate fields, especially canonical, description, OpenGraph, and Twitter tags.</p>
+<p>Another plugin or theme may also inject/manage the same meta tags. Check for existing tags before enabling duplicate fields, especially Keywords, canonical, description, OpenGraph, and Twitter tags.</p>
 ';
 
 $string['editingtags']         = 'Editing meta tags';
@@ -133,7 +133,7 @@ $string['resetconfirm']        = 'Are you sure you want to delete all meta tag o
 
 $string['manage_intro']        = 'Start by adding site-wide meta tags. They apply across the site unless you later create a more-specific override.';
 $string['manage_col_pagetype'] = 'Page type';
-$string['manage_none']         = 'No overrides have been defined yet. Global defaults apply everywhere.';
+$string['manage_none']         = 'No metatags have been defined yet.';
 
 $string['tag_description']         = 'Description';
 $string['tag_description_help']    = 'A short plain-text summary of the page. You can use [description] to use the current course, activity, category, user, or site description. Example value: Learn how to create and manage Moodle courses.';
