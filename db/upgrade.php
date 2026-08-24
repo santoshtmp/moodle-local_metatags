@@ -34,27 +34,5 @@ defined('MOODLE_INTERNAL') || die();
 function xmldb_local_metatags_upgrade($oldversion) {
     global $DB;
     $dbman = $DB->get_manager();
-
-    // if ($oldversion < 2026092401) {
-    //     $table = new xmldb_table('local_metatags_tags');
-
-    //     // Older installations used pagetype alone as a unique index.
-    //     $legacyindex = new xmldb_index('pagetype', XMLDB_INDEX_UNIQUE, ['pagetype']);
-    //     if ($dbman->index_exists($table, $legacyindex)) {
-    //         $dbman->drop_index($table, $legacyindex);
-    //     }
-
-    //     $compositeindex = new xmldb_index(
-    //         'pagetype_urlpath',
-    //         XMLDB_INDEX_UNIQUE,
-    //         ['pagetype', 'urlpath']
-    //     );
-    //     if (!$dbman->index_exists($table, $compositeindex)) {
-    //         $dbman->add_index($table, $compositeindex);
-    //     }
-
-    //     upgrade_plugin_savepoint(true, 2026092401, 'local', 'metatags');
-    // }
-
     return true;
 }
