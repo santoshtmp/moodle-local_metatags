@@ -154,9 +154,9 @@ class tags_form extends moodleform {
         if ($existing) {
             if ($existing->id != ($data['id'] ?? 0)) {
                 if ($pagetype === '__custom__') {
-                    $errors['custom_urlpath'] = get_string('alradyexist', 'local_metatags');
+                    $errors['custom_urlpath'] = get_string('alreadyexist', 'local_metatags');
                 } else {
-                    $errors['pagetype'] = get_string('alradyexist', 'local_metatags');
+                    $errors['pagetype'] = get_string('alreadyexist', 'local_metatags');
                 }
             }
         }

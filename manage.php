@@ -132,13 +132,13 @@ if (empty($buckets)) {
 
         // Action menu.
         $actionmenu = new action_menu();
-        $actionmenu->set_kebab_trigger('Action', $corerenderer);
+        $actionmenu->set_kebab_trigger(get_string('action', 'moodle'), $corerenderer);
         $actionmenu->set_additional_classes('fields-actions');
         $actionurlparam = ['id' => $bucket->id, 'sesskey' => sesskey()];
 
         $actionmenu->add(new \action_menu_link(
             new moodle_url($actionpagepath, ['action' => 'edit'] + $actionurlparam),
-            new pix_icon('i/edit', 'edit'),
+            new pix_icon('i/edit', get_string('edit', 'moodle')),
             get_string('edit', 'local_metatags'),
             false,
             ['data-id' => $bucket->id]
@@ -146,7 +146,7 @@ if (empty($buckets)) {
 
         $actionmenu->add(new \action_menu_link(
             new moodle_url($actionpagepath, ['action' => 'delete'] + $actionurlparam),
-            new pix_icon('i/delete', 'delete'),
+            new pix_icon('i/delete', get_string('delete', 'moodle')),
             get_string('delete', 'local_metatags'),
             false,
             [
