@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/metatags/db" VERSION="20260822" COMMENT="XMLDB file for Moodle local/metatags"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+    <TABLE NAME="local_metatags_tags" COMMENT="Stores meta tag configuration by page type">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Primary key"/>
+        <FIELD NAME="pagetype" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" COMMENT="Moodle page type. E.g. course-view-*, blog-*, site-index. Use custom for URL-specific configuration and * for global configuration."/>
+        <FIELD NAME="urlpath" TYPE="char" LENGTH="200" NOTNULL="true" SEQUENCE="false" COMMENT="URL path for custom page type. Empty for non-custom page types."/>
+        <FIELD NAME="tags" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="JSON encoded meta tag configuration."/>
+        <FIELD NAME="status" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" COMMENT="Whether this configuration is enabled. 1 = enabled, 0 = disabled."/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" COMMENT="Unix timestamp when the record was created."/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" COMMENT="Unix timestamp when the record was last modified."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="pagetype_urlpath" UNIQUE="true" FIELDS="pagetype,urlpath"/>
+        <INDEX NAME="pagetype_idx" UNIQUE="false" FIELDS="pagetype"/>
+        <INDEX NAME="timemodified_idx" UNIQUE="false" FIELDS="timemodified"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
