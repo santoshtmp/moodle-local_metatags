@@ -75,7 +75,7 @@ echo html_writer::link(
     $addurl,
     get_string('addmetatag', 'local_metatags'),
     [
-        'class' => 'btn btn-primary mr-2',
+        'class' => 'btn btn-primary',
     ]
 );
 
