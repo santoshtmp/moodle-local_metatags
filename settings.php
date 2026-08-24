@@ -25,10 +25,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// Single entry point: a link under Appearance that goes straight to the
-// management/overview page. All actual configuration (global tags, per-scope
-// overrides, the "automatic tags" toggle) lives inside manage.php / edit.php
-// themselves rather than in a separate admin settings form.
+/**
+ * Single entry point: a link under Appearance that goes straight to the
+ * management/overview page. All actual configuration (global tags, per-scope
+ * overrides, the "automatic tags" toggle) lives inside manage.php / edit.php
+ * themselves rather than in a separate admin settings form.
+ */
 if ($hassiteconfig) {
     $ADMIN->add('appearance', new admin_externalpage(
         'local_metatags_manage',
@@ -38,6 +40,5 @@ if ($hassiteconfig) {
     ));
 }
 
-// This plugin does not register a standard admin_settingpage, so make sure
-// the settings loader does not try to render one for local_metatags.
+// This plugin does not register a standard admin_settingpage, so make sure the settings loader does not try to render one for local_metatags.
 $settings = null;
