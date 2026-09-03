@@ -30,11 +30,11 @@ namespace local_metatags;
  */
 class tag_applier {
     /**
-     * Resolve the effective list of meta tags for the given Moodle page,
-     * honouring the inheritance chain: activity/module > course > category
-     * (all the way up nested categories) > system(global), with page-type
-     * specific overrides taking priority over context-wide ones at the same
-     * context level.
+     * Resolve the effective list of meta tags for the given Moodle page.
+     *
+     * A custom URL configuration takes priority. Otherwise, the most specific
+     * matching page-type configuration is selected, falling back to broader
+     * page-type patterns and finally the global configuration.
      *
      * @param \moodle_page $page
      * @return array list of ['attribute'=>, 'tagname'=>, 'content'=>]

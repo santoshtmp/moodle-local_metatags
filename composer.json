@@ -2,7 +2,6 @@
     "name": "santoshtmp/moodle-local_metatags",
     "description": "Moodle local plugin for managing HTML meta tags.",
     "type": "moodle-local",
-    "version": "2026090300",
     "require": {
         "moodle/composer-installer": "*",
         "moodle/moodle": "v4.5* || v5.*"
