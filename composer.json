@@ -1,8 +1,8 @@
 {
-    "name": "santoshmagar/moodle-local_metatags",
+    "name": "santoshtmp/moodle-local_metatags",
     "description": "Moodle local plugin for managing HTML meta tags.",
     "type": "moodle-local",
-    "version": "2026092401",
+    "version": "2026090300",
     "require": {
         "moodle/composer-installer": "*",
         "moodle/moodle": "v4.5* || v5.*"
@@ -13,8 +13,8 @@
     "license": "GPL-3.0-or-later",
     "authors": [
         {
-            "name": "Andrei Bautu",
-            "email": "abautu@gmail.com"
+            "name": "Santosh Thapa Magar",
+            "email": "santoshtmp7@gmail.com"
         }
     ]
 }

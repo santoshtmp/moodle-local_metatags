@@ -31,7 +31,7 @@ $plugin->component = 'local_metatags';
 $plugin->release = '1.0.0';
 
 // This is the version of the plugin.
-$plugin->version = 2026092401;
+$plugin->version = 2026090300;
 
 // This is a stable release.
 $plugin->maturity = MATURITY_STABLE;
