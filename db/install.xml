@@ -6,7 +6,7 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Primary key"/>
         <FIELD NAME="pagetype" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" COMMENT="Moodle page type. E.g. course-view-*, blog-*, site-index. Use custom for URL-specific configuration and * for global configuration."/>
-        <FIELD NAME="urlpath" TYPE="char" LENGTH="200" NOTNULL="true" SEQUENCE="false" COMMENT="URL path for custom page type. Empty for non-custom page types."/>
+        <FIELD NAME="urlpath" TYPE="char" LENGTH="225" NOTNULL="true" SEQUENCE="false" COMMENT="URL path for custom page type. Empty for non-custom page types."/>
         <FIELD NAME="tags" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="JSON encoded meta tag configuration."/>
         <FIELD NAME="status" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" COMMENT="Whether this configuration is enabled. 1 = enabled, 0 = disabled."/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" COMMENT="Unix timestamp when the record was created."/>
